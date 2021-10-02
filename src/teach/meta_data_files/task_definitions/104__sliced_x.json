@@ -1,0 +1,31 @@
+{
+  "task_id": 104,
+  "task_name": "Sliced X",
+  "task_nparams": 1,
+  "task_anchor_object": "#0",
+  "desc": "Make a slice of #0.",
+  "components": {
+    "#0": {
+      "determiner": "a",
+      "primary_condition": "objectType",
+      "instance_shareable": false,
+      "conditions": {
+        "objectType": "#0Sliced"
+      },
+      "condition_failure_descs": {
+        "objectType": "The #0 needs to be sliced using a knife."
+      }
+    },
+    "knife": {
+      "determiner": "a",
+      "primary_condition": "objectType",
+      "instance_shareable": true,
+      "conditions": {
+        "objectType": "Knife"
+      },
+      "condition_failure_descs": {
+      }
+    }
+  },
+  "relations": []
+}

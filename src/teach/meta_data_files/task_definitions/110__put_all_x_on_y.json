@@ -1,0 +1,38 @@
+{
+  "task_id": 110,
+  "task_name": "Put All X On Y",
+  "task_nparams": 3,
+  "task_anchor_object": null,
+  "desc": "Put all #0 #1 any #2.",
+  "components": {
+    "#0": {
+      "determiner": "all",
+      "primary_condition": "simbotObjectClass",
+      "instance_shareable": false,
+      "conditions": {
+          "simbotObjectClass": "#0"
+      },
+      "condition_failure_descs": {}
+    },
+    "#2": {
+      "determiner": "a",
+      "primary_condition": "simbotObjectClass",
+      "instance_shareable": true,
+      "conditions": {
+          "simbotObjectClass": "#2",
+          "receptacle": 1
+      },
+      "condition_failure_descs": {}
+    }
+  },
+  "relations": [
+    {
+      "property": "parentReceptacles",
+      "tail_entity_list": ["#2"],
+      "tail_determiner_list": ["a"],
+      "head_entity_list": ["#0"],
+      "head_determiner_list": ["all"],
+      "failure_desc": "The #0 needs to be put #1to a #2"
+    }
+  ]
+}

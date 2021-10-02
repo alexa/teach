@@ -1,0 +1,53 @@
+{
+  "task_id": 401,
+  "task_name": "Basic Kitchen Tasks",
+  "task_nparams": 0,
+  "task_anchor_object": null,
+  "desc": "Complete the following tasks.",
+  "components": {
+    "coffee": {
+      "determiner": "a",
+      "task_name": "Coffee",
+      "task_params": []
+    },
+    "toast": {
+      "determiner": "a",
+      "task_name": "Plate Of Toast",
+      "task_params": []
+    },
+    "omelette": {
+      "determiner": "a",
+      "task_name": "Omelette",
+      "task_params": []
+    },
+    "spatula": {
+      "determiner": "a",
+      "primary_condition": "objectType",
+      "instance_shareable": true,
+      "conditions": {
+          "objectType": "Spatula"
+      },
+      "condition_failure_descs": {}
+    },
+    "drawer": {
+      "determiner": "a",
+      "primary_condition": "objectType",
+      "instance_shareable": true,
+      "conditions": {
+          "objectType": "Drawer",
+          "receptacle": 1
+      },
+      "condition_failure_descs": {}
+    }
+  },
+  "relations": [
+    {
+      "property": "parentReceptacles",
+      "tail_entity_list": ["drawer"],
+      "tail_determiner_list": ["a"],
+      "head_entity_list": ["spatula"],
+      "head_determiner_list": ["a"],
+      "failure_desc": "The spatula needs to be in a drawer."
+    }
+  ]
+}

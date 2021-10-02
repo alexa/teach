@@ -1,0 +1,20 @@
+{
+  "task_id": 201,
+  "task_name": "Tutorial",
+  "task_nparams": 0,
+  "task_anchor_object": null,
+  "desc": "Complete the following tasks.",
+  "components": {
+    "coffee": {
+      "determiner": "a",
+      "task_name": "Coffee",
+      "task_params": []
+    },
+    "potato": {
+      "determiner": "a",
+      "task_name": "Cooked Slice Of X",
+      "task_params": ["Potato"]
+    }
+  },
+  "relations": []
+}

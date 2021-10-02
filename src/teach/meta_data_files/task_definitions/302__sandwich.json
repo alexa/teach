@@ -1,0 +1,43 @@
+{
+  "task_id": 302,
+  "task_name": "Sandwich",
+  "task_nparams": 2,
+  "comments_task_params": {
+    "#0": "Number of lettuce slices",
+    "#1": "Number of tomato slices"
+  },
+  "task_anchor_object": "plate",
+  "desc": "Make a sandwich.",
+  "components": {
+    "toast": {
+      "determiner": "2",
+      "task_name": "Toast",
+      "task_params": []
+    },
+    "lettuce": {
+      "determiner": "#0",
+      "task_name": "Sliced X",
+      "task_params": ["Lettuce"]
+    },
+    "tomato": {
+      "determiner": "#1",
+      "task_name": "Sliced X",
+      "task_params": ["Tomato"]
+    },
+    "plate": {
+      "determiner": "a",
+      "task_name": "Clean X",
+      "task_params": ["Plate"]
+    }
+  },
+  "relations": [
+    {
+      "property": "parentReceptacles",
+      "tail_entity_list": ["plate"],
+      "tail_determiner_list": ["the"],
+      "head_entity_list": ["toast", "lettuce", "tomato"],
+      "head_determiner_list": ["2", "#0", "#1"],
+      "failure_desc": "All sandwich components need to be on a plate."
+    }
+  ]
+}

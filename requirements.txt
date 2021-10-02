@@ -1,0 +1,9 @@
+ai2thor==3.1.0
+boto3==1.15.2
+fuzzywuzzy==0.18.0
+networkx==2.5
+pydub==0.24.1
+python-Levenshtein
+tqdm
+pillow
+pydantic==1.8.2

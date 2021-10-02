@@ -1,0 +1,33 @@
+{
+  "task_id": 103,
+  "task_name": "Clean X",
+  "task_nparams": 1,
+  "task_anchor_object": "#0",
+  "desc": "Clean a #0.",
+  "components": {
+    "#0": {
+      "determiner": "a",
+      "primary_condition": "simbotObjectClass",
+      "instance_shareable": false,
+      "conditions": {
+        "simbotObjectClass": "#0",
+        "isDirty": 0
+      },
+      "condition_failure_descs": {
+        "isDirty": "The #0 is dirty. Rinse with water."
+      }
+    },
+    "sink": {
+      "determiner": "a",
+      "primary_condition": "objectType",
+      "instance_shareable": true,
+      "conditions": {
+        "objectType": "Sink",
+        "receptacle": 1
+      },
+      "condition_failure_descs": {
+      }
+    }
+  },
+  "relations": []
+}

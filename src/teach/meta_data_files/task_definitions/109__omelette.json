@@ -1,0 +1,23 @@
+{
+  "task_id": 109,
+  "task_name": "Omelette",
+  "task_nparams": 0,
+  "task_anchor_object": "omelette",
+  "desc": "Make an omelette.",
+  "components": {
+    "omelette": {
+      "determiner": "a",
+      "primary_condition": "objectType",
+      "instance_shareable": false,
+      "conditions": {
+        "objectType": "EggCracked",
+        "isCooked": 1
+      },
+      "condition_failure_descs": {
+        "objectType": "The egg needs to be cracked in a pan using a knife.",
+        "isCooked": "The cracked egg needs to be cooked."
+      }
+    }
+  },
+  "relations": []
+}

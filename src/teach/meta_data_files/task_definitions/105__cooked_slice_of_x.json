@@ -1,0 +1,33 @@
+{
+  "task_id": 105,
+  "task_name": "Cooked Slice Of X",
+  "task_nparams": 1,
+  "task_anchor_object": "#0",
+  "desc": "Cook a slice of #0.",
+  "components": {
+    "#0": {
+      "determiner": "a",
+      "primary_condition": "objectType",
+      "instance_shareable": false,
+      "conditions": {
+        "objectType": "#0Sliced",
+        "simbotIsCooked": 1
+      },
+      "condition_failure_descs": {
+        "objectType": "The #0 needs to be sliced using a knife.",
+        "simbotIsCooked": "The #0 slice needs to be cooked."
+      }
+    },
+    "knife": {
+      "determiner": "a",
+      "primary_condition": "objectType",
+      "instance_shareable": true,
+      "conditions": {
+        "objectType": "Knife"
+      },
+      "condition_failure_descs": {
+      }
+    }
+  },
+  "relations": []
+}

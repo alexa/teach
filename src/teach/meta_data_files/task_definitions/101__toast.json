@@ -1,0 +1,23 @@
+{
+  "task_id": 101,
+  "task_name": "Toast",
+  "task_nparams": 0,
+  "task_anchor_object": "toast",
+  "desc": "Make a slice of toast.",
+  "components": {
+    "toast": {
+      "determiner": "a",
+      "primary_condition": "objectType",
+      "instance_shareable": false,
+      "conditions": {
+        "objectType": "BreadSliced",
+        "isCooked": 1
+      },
+      "condition_failure_descs": {
+        "objectType": "The bread needs to be sliced using a knife.",
+        "isCooked": "The bread needs to be toasted."
+      }
+    }
+  },
+  "relations": []
+}

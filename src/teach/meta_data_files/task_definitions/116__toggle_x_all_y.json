@@ -1,0 +1,22 @@
+{
+  "task_id": 116,
+  "task_name": "Toggle X All Y",
+  "task_nparams": 3,
+  "task_anchor_object": null,
+  "desc": "Turn #0 all #2.",
+  "components": {
+    "#1": {
+      "determiner": "all",
+      "primary_condition": "simbotObjectClass",
+      "instance_shareable": false,
+      "conditions": {
+          "simbotObjectClass": "#2",
+          "isToggled": "#1"
+      },
+      "condition_failure_descs": {
+        "isToggled": "The #2 should be turned #0."
+      }
+    }
+  },
+  "relations": []
+}

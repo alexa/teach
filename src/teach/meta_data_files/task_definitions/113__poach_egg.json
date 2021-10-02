@@ -1,0 +1,23 @@
+{
+  "task_id": 113,
+  "task_name": "Poach Egg",
+  "task_nparams": 0,
+  "task_anchor_object": "poached_egg",
+  "desc": "Poach the egg.",
+  "components": {
+    "poached_egg": {
+      "determiner": "a",
+      "primary_condition": "objectType",
+      "instance_shareable": false,
+      "conditions": {
+        "objectType": "EggCracked",
+        "simbotIsBoiled": 1
+      },
+      "condition_failure_descs": {
+        "objectType": "Crack the egg in a bowl using a knife.",
+        "simbotIsBoiled": "Poach the cracked egg by cooking it water."
+      }
+    }
+  },
+  "relations": []
+}

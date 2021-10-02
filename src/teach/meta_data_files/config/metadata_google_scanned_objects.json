@@ -1,0 +1,108 @@
+{
+    "supported_objects": [
+        {
+            "object_type": "google_scanned_objects",
+            "objects": [
+                {
+                    "name": "Schleich_African_Black_Rhino",
+                    "images": [
+                        {
+                            "rgb": "0.jpg",
+                            "rgb_thumb": "thumb.jpg"
+                        }
+                    ]
+                },
+                {
+                    "name": "Now_Designs_Bowl_Akita_Black",
+                    "images": [
+                        {
+                            "rgb": "0.jpg",
+                            "rgb_thumb": "thumb.jpg"
+                        }
+                    ]
+                },
+                {
+                    "name": "Weisshai_Great_White_Shark",
+                    "images": [
+                        {
+                            "rgb": "0.jpg",
+                            "rgb_thumb": "thumb.jpg"
+                        }
+                    ]
+                },
+                {
+                    "name": "Reebok_ZIGTECH_SHARK_MAYHEM360",
+                    "images": [
+                        {
+                            "rgb": "0.jpg",
+                            "rgb_thumb": "thumb.jpg"
+                        }
+                    ]
+                },
+                {
+                    "name": "Toysmith_Windem_Up_Flippin_Animals_Dog",
+                    "images": [
+                        {
+                            "rgb": "0.jpg",
+                            "rgb_thumb": "thumb.jpg"
+                        }
+                    ]
+                },
+                {
+                    "name": "Sonny_School_Bus",
+                    "images": [
+                        {
+                            "rgb": "0.jpg",
+                            "rgb_thumb": "thumb.jpg"
+                        }
+                    ]
+                },
+                {
+                    "name": "Razer_Naga_MMO_Gaming_Mouse",
+                    "images": [
+                        {
+                            "rgb": "0.jpg",
+                            "rgb_thumb": "thumb.jpg"
+                        }
+                    ]
+                },
+                {
+                    "name": "Crosley_Alarm_Clock_Vintage_Metal",
+                    "images": [
+                        {
+                            "rgb": "0.jpg",
+                            "rgb_thumb": "thumb.jpg"
+                        }
+                    ]
+                },
+                {
+                    "name": "Diamond_Visions_Scissors_Red",
+                    "images": [
+                        {
+                            "rgb": "0.jpg",
+                            "rgb_thumb": "thumb.jpg"
+                        }
+                    ]
+                },
+                {
+                    "name": "Wishbone_Pencil_Case",
+                    "images": [
+                        {
+                            "rgb": "0.jpg",
+                            "rgb_thumb": "thumb.jpg"
+                        }
+                    ]
+                },
+                {
+                    "name": "ASICS_GELLinksmaster_WhiteRasberryGunmetal",
+                    "images": [
+                        {
+                            "rgb": "0.jpg",
+                            "rgb_thumb": "thumb.jpg"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
