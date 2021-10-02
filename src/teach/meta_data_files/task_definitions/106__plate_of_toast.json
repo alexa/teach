@@ -1,0 +1,29 @@
+{
+  "task_id": 106,
+  "task_name": "Plate Of Toast",
+  "task_nparams": 0,
+  "task_anchor_object": "plate",
+  "desc": "Make a plate of toast.",
+  "components": {
+    "toast": {
+      "determiner": "a",
+      "task_name": "Toast",
+      "task_params": []
+    },
+    "plate": {
+      "determiner": "a",
+      "task_name": "Clean X",
+      "task_params": ["Plate"]
+    }
+  },
+  "relations": [
+    {
+      "property": "parentReceptacles",
+      "tail_entity_list": ["plate"],
+      "tail_determiner_list": ["the"],
+      "head_entity_list": ["toast"],
+      "head_determiner_list": ["a"],
+      "failure_desc": "The toast needs to be on a clean plate."
+    }
+  ]
+}

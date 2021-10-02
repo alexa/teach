@@ -1,0 +1,20 @@
+{
+  "task_id": 405,
+  "task_name": "Custom Properties Kitchen Tasks",
+  "task_nparams": 0,
+  "task_anchor_object": null,
+  "desc": "Complete the following tasks.",
+  "components": {
+    "boiled_potato": {
+      "determiner": "a",
+      "task_name": "Boil X",
+      "task_params": ["Potato"]
+    },
+    "poached_egg": {
+      "determiner": "a",
+      "task_name": "Poach Egg",
+      "task_params": []
+    }
+  },
+  "relations": []
+}

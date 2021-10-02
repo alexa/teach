@@ -1,0 +1,81 @@
+{
+  "task_id": 305,
+  "task_name": "Workspace",
+  "task_nparams": 3,
+  "comments_task_params": {
+    "#0": "Number of WritingUtensils",
+    "#1": "Number of laptops",
+    "#2": "Number of books"
+  },
+  "task_anchor_object": null,
+  "desc": "Prepare a workspace.",
+  "components": {
+    "writing": {
+      "determiner": "#0",
+      "primary_condition": "simbotObjectClass",
+      "instance_shareable": true,
+      "conditions": {
+        "simbotObjectClass": "WritingUtensils"
+      },
+      "condition_failure_descs": {}
+    },
+    "laptop": {
+      "determiner": "#1",
+      "primary_condition": "objectType",
+      "instance_shareable": true,
+      "conditions": {
+        "objectType": "Laptop",
+        "isToggled": 1,
+        "isOpen": 1
+      },
+      "condition_failure_descs": {
+        "isToggled": "The laptop should be powered on.",
+        "isOpen": "The laptop should be open."
+      }
+    },
+    "book": {
+      "determiner": "#2",
+      "primary_condition": "objectType",
+      "instance_shareable": true,
+      "conditions": {
+        "objectType": "Book",
+        "isOpen": 1
+      },
+      "condition_failure_descs": {
+        "isOpen": "The book should be open."
+      }
+    },
+    "gather_spot": {
+      "determiner": "a",
+      "primary_condition": "simbotObjectClass",
+      "instance_shareable": true,
+      "conditions": {
+        "simbotObjectClass": "Tables",
+        "receptacle": 1
+      },
+      "condition_failure_descs": {}
+    },
+    "lights": {
+      "determiner": "a",
+      "primary_condition": "objectType",
+      "instance_shareable": false,
+      "conditions": {
+          "objectType": "LightSwitch",
+          "isToggled": 1
+      },
+      "condition_failure_descs": {
+        "isToggled": "The overhead lights should be on."
+      }
+    }
+  },
+  "relations": [
+    {
+      "property": "parentReceptacles",
+      "tail_entity_list": ["gather_spot"],
+      "tail_determiner_list": ["the"],
+      "head_entity_list": ["writing", "laptop", "book"],
+      "head_determiner_list": ["#0", "#1", "#2"],
+      "failure_desc": "#0 writing utensils, #1 laptops, and #2 books need to be put on the table."
+    }
+  ]
+}

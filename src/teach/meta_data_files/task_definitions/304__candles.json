@@ -1,0 +1,42 @@
+{
+  "task_id": 304,
+  "task_name": "Candles",
+  "task_nparams": 0,
+  "task_anchor_object": null,
+  "desc": "Set the candles by the bathtub and light them.",
+  "components": {
+    "candles": {
+      "determiner": "all",
+      "primary_condition": "objectType",
+      "instance_shareable": true,
+      "conditions": {
+        "objectType": "Candle",
+        "isToggled": 1
+      },
+      "condition_failure_descs": {
+        "isToggled": "The candle needs to be lit."
+      }
+    },
+    "bathtub": {
+      "determiner": "a",
+      "primary_condition": "objectType",
+      "instance_shareable": true,
+      "conditions": {
+        "objectType": "Bathtub",
+        "receptacle": 1
+      },
+      "condition_failure_descs": {
+      }
+    }
+  },
+  "relations": [
+    {
+      "property": "parentReceptacles",
+      "tail_entity_list": ["bathtub"],
+      "tail_determiner_list": ["a"],
+      "head_entity_list": ["candles"],
+      "head_determiner_list": ["all"],
+      "failure_desc": "The candle needs to be put into a bathtub."
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "task_id": 112,
+  "task_name": "Boil X",
+  "task_nparams": 1,
+  "task_anchor_object": "boiled_#0",
+  "desc": "Boil #0.",
+  "components": {
+    "boiled_#0": {
+      "determiner": "a",
+      "primary_condition": "objectType",
+      "instance_shareable": false,
+      "conditions": {
+        "objectType": "#0",
+        "simbotIsBoiled": 1
+      },
+      "condition_failure_descs": {
+        "simbotIsBoiled": "Boil the #0 by cooking it in water."
+      }
+    }
+  },
+  "relations": []
+}

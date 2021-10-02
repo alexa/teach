@@ -1,0 +1,350 @@
+ {
+    "definitions": {
+        "agents": [
+            {
+                "agent_id": 0,
+                "agent_name": "Commander",
+                "agent_type": 0
+            },
+            {
+                "agent_id": 1,
+                "agent_name": "Driver",
+                "agent_type": 1
+            }
+        ],
+        "actions": [
+            {
+                "action_id": 0,
+                "action_name": "Stop",
+                "action_type": "Motion",
+                "pose_delta": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ]
+            },
+            {
+                "action_id": 1,
+                "action_name": "Move to",
+                "action_type": "Motion",
+                "pose_delta": []
+            },
+            {
+                "action_id": 2,
+                "action_name": "Forward",
+                "action_type": "Motion",
+                "pose_delta": [
+                    0.25,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ]
+            },
+            {
+                "action_id": 3,
+                "action_name": "Backward",
+                "action_type": "Motion",
+                "pose_delta": [
+                    -0.25,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ]
+            },
+            {
+                "action_id": 4,
+                "action_name": "Turn Left",
+                "action_type": "Motion",
+                "pose_delta": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    90
+                ]
+            },
+            {
+                "action_id": 5,
+                "action_name": "Turn Right",
+                "action_type": "Motion",
+                "pose_delta": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    -90
+                ]
+            },
+            {
+                "action_id": 6,
+                "action_name": "Look Up",
+                "action_type": "Motion",
+                "pose_delta": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    -30,
+                    0
+                ]
+            },
+            {
+                "action_id": 7,
+                "action_name": "Look Down",
+                "action_type": "Motion",
+                "pose_delta": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    30,
+                    0
+                ]
+            },            
+            {
+                "action_id": 8,
+                "action_name": "Pan Left",
+                "action_type": "Motion",
+                "pose_delta": [
+                    0,
+                    0.25,
+                    0,
+                    0,
+                    0,
+                    0
+                ]
+            },
+            {
+                "action_id": 9,
+                "action_name": "Pan Right",
+                "action_type": "Motion",
+                "pose_delta": [
+                    0,
+                    -0.25,
+                    0,
+                    0,
+                    0,
+                    0
+                ]
+            },            
+            {
+                "action_id": 10,
+                "action_name": "Move Up",
+                "action_type": "Motion",
+                "pose_delta": [
+                    0,
+                    0,
+                    0.25,
+                    0,
+                    0,
+                    0
+                ]
+            },
+            {
+                "action_id": 11,
+                "action_name": "Move Down",
+                "action_type": "Motion",
+                "pose_delta": [
+                    0,
+                    0,
+                    -0.25,
+                    0,
+                    0,
+                    0
+                ]
+            },             
+            {
+                "action_id": 12,
+                "action_name": "Double Forward",
+                "action_type": "Motion",
+                "pose_delta": [
+                    0.5,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ]
+            },
+            {
+                "action_id": 13,
+                "action_name": "Double Backward",
+                "action_type": "Motion",
+                "pose_delta": [
+                    -0.5,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ]
+            },
+            {
+                "action_id": 300,
+                "action_name": "Navigation",
+                "action_type": "MapGoal",
+                "start_x": -1,
+                "start_y": -1,
+                "end_x": -1,
+                "end_y": -1
+            },
+            {
+                "action_id": 200,
+                "action_name": "Pickup",
+                "action_type": "ObjectInteraction",
+                "x": -1,
+                "y": -1
+            },
+            {
+                "action_id": 201,
+                "action_name": "Place",
+                "action_type": "ObjectInteraction",
+                "x": -1,
+                "y": -1
+            },
+            {
+                "action_id": 202,
+                "action_name": "Open",
+                "action_type": "ObjectInteraction",
+                "x": -1,
+                "y": -1
+            },
+            {
+                "action_id": 203,
+                "action_name": "Close",
+                "action_type": "ObjectInteraction",
+                "x": -1,
+                "y": -1
+            },
+            {
+                "action_id": 204,
+                "action_name": "ToggleOn",
+                "action_type": "ObjectInteraction",
+                "x": -1,
+                "y": -1
+            },
+            {
+                "action_id": 205,
+                "action_name": "ToggleOff",
+                "action_type": "ObjectInteraction",
+                "x": -1,
+                "y": -1
+            },
+            {
+                "action_id": 206,
+                "action_name": "Slice",
+                "action_type": "ObjectInteraction",
+                "x": -1,
+                "y": -1
+            },
+            {
+                "action_id": 207,
+                "action_name": "Dirty",
+                "action_type": "ObjectInteraction",
+                "x": -1,
+                "y": -1
+            },
+            {
+                "action_id": 208,
+                "action_name": "Clean",
+                "action_type": "ObjectInteraction",
+                "x": -1,
+                "y": -1
+            },
+            {
+                "action_id": 209,
+                "action_name": "Fill",
+                "action_type": "ObjectInteraction",
+                "x": -1,
+                "y": -1
+            },
+            {
+                "action_id": 210,
+                "action_name": "Empty",
+                "action_type": "ObjectInteraction",
+                "x": -1,
+                "y": -1
+            },
+            {
+                "action_id": 211,
+                "action_name": "Pour",
+                "action_type": "ObjectInteraction",
+                "x": -1,
+                "y": -1
+            },
+            {
+                "action_id": 212,
+                "action_name": "Break",
+                "action_type": "ObjectInteraction",
+                "x": -1,
+                "y": -1
+            },
+            {
+                "action_id": 400,
+                "action_name": "BehindAboveOn",
+                "action_type": "ChangeCamera"
+            },
+            {
+                "action_id": 401,
+                "action_name": "BehindAboveOff",
+                "action_type": "ChangeCamera"
+            },
+            {
+                "action_id": 500,
+                "action_name": "OpenProgressCheck",
+                "action_type": "ProgressCheck",
+                "query": ""
+            },
+            {
+                "action_id": 501,
+                "action_name": "SelectOid",
+                "action_type": "ProgressCheck",
+                "query": ""
+            },
+            {
+                "action_id": 502,
+                "action_name": "SearchObject",
+                "action_type": "ProgressCheck",
+                "query": ""
+            },
+            {
+                "action_id": 100,
+                "action_name": "Text",
+                "action_type": "Keyboard",
+                "utterance": ""
+            },
+            {
+                "action_id": 101,
+                "action_name": "Speech",
+                "action_type": "Audio",
+                "utterance": "",
+                "file_name": ""
+            },
+            {
+                "action_id": 102,
+                "action_name": "Beep",
+                "action_type": "Audio",
+                "repeat": 3
+            }
+        ],
+        "status": [
+            {
+                "status_id": 0,
+                "status_name": "Success"
+            },
+            {
+                "status_id": 1,
+                "status_name": "Failure"
+            }
+        ]
+    }
+}

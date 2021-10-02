@@ -1,0 +1,76 @@
+{
+  "task_id": 301,
+  "task_name": "Breakfast",
+  "task_nparams": 14,
+  "comments_task_params": {
+    "#0": "Number of coffees",
+    "#1": "Number of plates of toast",
+    "#2": "Number of potato dishes",
+    "#3": "Serving container for potato eg: Plate",
+    "#4": "Number of apple dishes",
+    "#5": "Serving container for apple eg: Plate",
+    "#6": "Number of sandwiches",
+    "#7": "Number of lettuce slices per sandwich",
+    "#8": "Number of tomato slices per sandwich",
+    "#9": "Number of salads",
+    "#10": "Number of lettuce slices per salad",
+    "#11": "Number of tomato slices per salad",
+    "#12": "Number of cooked potato slices per salad",
+    "#13": "Serving receptacle for all breakfast items: eg: CounterTop"
+  },
+  "task_anchor_object": null,
+  "desc": "Prepare breakfast.",
+  "components": {
+    "coffee": {
+      "determiner": "#0",
+      "task_name": "Coffee",
+      "task_params": []
+    },
+    "toast": {
+      "determiner": "#1",
+      "task_name": "Plate Of Toast",
+      "task_params": []
+    },
+    "potatoes": {
+      "determiner": "#2",
+      "task_name": "N Cooked Slices Of X In Y",
+      "task_params": ["2", "Potato", "on", "#3"]
+    },
+    "apple": {
+      "determiner": "#4",
+      "task_name": "N Slices Of X In Y",
+      "task_params": ["1", "Apple", "on", "#5"]
+    },
+    "sandwich": {
+      "determiner": "#6",
+      "task_name": "Sandwich",
+      "task_params": ["#7", "#8"]
+    },
+    "salad": {
+      "determiner": "#9",
+      "task_name": "Salad",
+      "task_params": ["#10", "#11", "#12"]
+    },
+    "serving_spot": {
+      "determiner": "a",
+      "primary_condition": "objectType",
+      "instance_shareable": true,
+      "conditions": {
+        "objectType": "#13",
+        "receptacle": 1
+      },
+      "condition_failure_descs": {
+      }
+    }
+  },
+  "relations": [
+    {
+      "property": "parentReceptacles",
+      "tail_entity_list": ["serving_spot"],
+      "tail_determiner_list": ["a"],
+      "head_entity_list": ["coffee", "toast", "potatoes", "apple", "sandwich", "salad"],
+      "head_determiner_list": ["#0", "#1", "#2", "#4", "#6", "#9"],
+      "failure_desc": "All breakfast items need to be on the #13."
+    }
+  ]
+}

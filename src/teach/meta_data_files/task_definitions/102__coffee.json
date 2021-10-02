@@ -1,0 +1,24 @@
+{
+  "task_id": 102,
+  "task_name": "Coffee",
+  "task_nparams": 0,
+  "task_anchor_object": "coffee",
+  "desc": "Prepare coffee in a clean mug.",
+  "components": {
+    "coffee": {
+      "determiner": "a",
+      "primary_condition": "objectType",
+      "instance_shareable": false,
+      "conditions": {
+        "objectType": "Mug",
+        "isDirty": 0,
+        "simbotIsFilledWithCoffee": 1
+      },
+      "condition_failure_descs": {
+        "isDirty": "The mug is dirty. Rinse with water.",
+        "simbotIsFilledWithCoffee": "The mug does not have coffee."
+      }
+    }
+  },
+  "relations": []
+}

@@ -1,0 +1,44 @@
+{
+  "task_id": 303,
+  "task_name": "Salad",
+  "task_nparams": 3,
+  "comments_task_params": {
+    "#0": "Number of lettuce slices",
+    "#1": "Number of tomato slices",
+    "#2": "Number of cooked potato slices"
+  },
+  "task_anchor_object": "plate",
+  "desc": "Make a salad.",
+  "components": {
+    "lettuce": {
+      "determiner": "#0",
+      "task_name": "Sliced X",
+      "task_params": ["Lettuce"]
+    },
+    "tomato": {
+      "determiner": "#1",
+      "task_name": "Sliced X",
+      "task_params": ["Tomato"]
+    },
+    "potato": {
+      "determiner": "#2",
+      "task_name": "Cooked Slice Of X",
+      "task_params": ["Potato"]
+    },
+    "plate": {
+      "determiner": "a",
+      "task_name": "Clean X",
+      "task_params": ["Plate"]
+    }
+  },
+  "relations": [
+    {
+      "property": "parentReceptacles",
+      "tail_entity_list": ["plate"],
+      "tail_determiner_list": ["the"],
+      "head_entity_list": ["lettuce", "tomato", "potato"],
+      "head_determiner_list": ["#0", "#1", "#2"],
+      "failure_desc": "All salad components need to be on a plate."
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "task_id": 403,
+  "task_name": "Basic Bathroom Tasks",
+  "task_nparams": 0,
+  "task_anchor_object": null,
+  "desc": "Complete the following tasks.",
+  "components": {
+    "faucets": {
+      "determiner": "all",
+      "primary_condition": "objectType",
+      "instance_shareable": true,
+      "conditions": {
+          "objectType": "Faucet",
+          "isToggled": 0
+      },
+      "condition_failure_descs": {
+          "isToggled": "The faucet needs to be turned off."
+      }
+    },
+    "candles": {
+      "determiner": "a",
+      "task_name": "Candles",
+      "task_params": []
+    },
+    "soap": {
+      "determiner": "all",
+      "primary_condition": "objectType",
+      "instance_shareable": true,
+      "conditions": {
+          "objectType": "SoapBar"
+      },
+      "condition_failure_descs": {}
+    },
+    "counter": {
+      "determiner": "a",
+      "primary_condition": "objectType",
+      "instance_shareable": true,
+      "conditions": {
+          "objectType": "CounterTop"
+      },
+      "condition_failure_descs": {}
+    }
+  },
+  "relations": [
+    {
+      "property": "parentReceptacles",
+      "tail_entity_list": ["counter"],
+      "tail_determiner_list": ["a"],
+      "head_entity_list": ["soap"],
+      "head_determiner_list": ["all"],
+      "failure_desc": "The soap needs to be put on the counter."
+    }
+  ]
+}

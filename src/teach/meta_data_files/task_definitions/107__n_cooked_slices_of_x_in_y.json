@@ -1,0 +1,29 @@
+{
+  "task_id": 107,
+  "task_name": "N Cooked Slices Of X In Y",
+  "task_nparams": 4,
+  "task_anchor_object": "#3",
+  "desc": "Cook #0 slice(s) of #1 and serve #2 a #3.",
+  "components": {
+    "#1": {
+      "determiner": "#0",
+      "task_name": "Cooked Slice Of X",
+      "task_params": ["#1"]
+    },
+    "#3": {
+      "determiner": "a",
+      "task_name": "Clean X",
+      "task_params": ["#3"]
+    }
+  },
+  "relations": [
+    {
+      "property": "parentReceptacles",
+      "tail_entity_list": ["#3"],
+      "tail_determiner_list": ["the"],
+      "head_entity_list": ["#1"],
+      "head_determiner_list": ["#0"],
+      "failure_desc": "The cooked #1 slice needs to be #2 a clean #3."
+    }
+  ]
+}

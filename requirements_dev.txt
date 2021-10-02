@@ -1,0 +1,12 @@
+black
+flake8
+flake8-black
+flake8-bugbear
+flake8-builtins
+flake8-eradicate
+flake8-fixme
+flake8-return
+flake8-quotes
+flake8-isort
+flake8-absolute-import
+isort

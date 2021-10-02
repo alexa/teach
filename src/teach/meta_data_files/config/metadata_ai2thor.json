@@ -1,0 +1,1104 @@
+{
+  "supported_worlds": [
+    {
+      "world_type": "Kitchen",
+      "worlds": [
+        {
+          "name": "FloorPlan1_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan2_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan3_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan4_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan5_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan6_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan7_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan8_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan9_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan10_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan11_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan12_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan13_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan14_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan15_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan16_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan17_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan18_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan19_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan20_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan21_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan22_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan23_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan24_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan25_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan26_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan27_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan28_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan29_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan30_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "world_type": "Living room",
+      "worlds": [
+        {
+          "name": "FloorPlan201_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan202_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan203_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan204_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan205_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan206_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan207_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan208_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan209_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan210_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan211_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan212_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan213_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan214_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan215_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan216_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan217_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan218_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan219_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan220_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan221_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan222_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan223_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan224_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan225_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan226_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan227_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan228_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan229_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan230_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "world_type": "Bedroom",
+      "worlds": [
+        {
+          "name": "FloorPlan301_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan302_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan303_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan304_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan305_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan306_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan307_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan308_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan309_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan310_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan311_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan312_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan313_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan314_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan315_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan316_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan317_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan318_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan319_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan320_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan321_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan322_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan323_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan324_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan325_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan326_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan327_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan328_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan329_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan330_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "world_type": "Bathroom",
+      "worlds": [
+        {
+          "name": "FloorPlan401_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan402_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan403_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan404_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan405_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan406_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan407_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan408_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan409_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan410_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan411_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan412_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan413_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan414_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan415_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan416_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan417_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan418_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan419_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan420_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan421_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan422_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan423_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan424_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan425_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan426_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan427_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan428_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan429_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        },
+        {
+          "name": "FloorPlan430_physics",
+          "floors": [
+            {
+              "rgb_thumb": "rgb_thumb.png",
+              "rgb": "rgb.png"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
