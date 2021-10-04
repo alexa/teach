@@ -1,5 +1,6 @@
 # TEACh
-Task-driven Embodied Agents that Chat
+[Task-driven Embodied Agents that Chat](https://arxiv.org/abs/2110.00534)
+
 Aishwarya Padmakumar*, Jesse Thomason*, Ayush Shrivastava, Patrick Lange, Anjali Narayan-Chen, Spandana Gella, Robinson Piramithu, Gokhan Tur, Dilek Hakkani-Tur
 
 TEACh is a dataset of human-human interactive dialogues to complete tasks in a simulated household environment. Please consider citing our paper if you find the code or dataset beneficial. 
