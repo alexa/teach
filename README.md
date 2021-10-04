@@ -1,9 +1,11 @@
 # TEACh
-[Task-driven Embodied Agents that Chat](https://arxiv.org/abs/2110.00534)
+Task-driven Embodied Agents that Chat
+Aishwarya Padmakumar*, Jesse Thomason*, Ayush Shrivastava, Patrick Lange, Anjali Narayan-Chen, Spandana Gella, Robinson Piramithu, Gokhan Tur, Dilek Hakkani-Tur
 
-Aishwarya Padmakumar*, Jesse Thomason*, Ayush Shrivastava, Patrick Lange, Anjali Narayan-Chen, Spandana Gella, Robinson Piramuthu, Gokhan Tur, Dilek Hakkani-Tur
-
-TEACh is a dataset of human-human interactive dialogues to complete tasks in a simulated household environment. Please consider citing our paper if you find the code or dataset beneficial. 
+TEACh is a dataset of human-human interactive dialogues to complete tasks in a simulated household environment. 
+The code is licensed under the MIT License (see SOFTWARELICENSE), images are licensed under Apache 2.0 
+(see IMAGESLICENSE) and other data files are licensed under CDLA-Sharing 1.0 (see DATALICENSE).
+Please include appropriate licensing and attribution when using our data and code, and please cite our paper.
 
 ## Prerequisites
 - python3 `>=3.7,<=3.8`
@@ -112,4 +114,5 @@ See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more inform
 
 ## License
 
-This library is licensed under the MIT-0 License. See the LICENSE file.
+The code is licensed under the MIT License (see SOFTWARELICENSE), images are licensed under Apache 2.0 
+(see IMAGESLICENSE) and other data files are licensed under CDLA-Sharing 1.0 (see DATALICENSE).
