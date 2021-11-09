@@ -34,6 +34,9 @@ directory (`/tmp/teach-dataset`).
 - `-sd`/`--skip-download`: If set, skip downloading archive files.
 - `-f`/`--file`: Specify the file name to be retrieved from S3 bucket.
 
+Recent file changes: Two game files, and their corresponding EDH and TfD instances were deleted from the `valid_unseen` split due to issues with the game files. 
+As a result, the `valid_unseen` split now has 612 gameplay sessions and TfD instances instead of 614, and 2603 EDH instances instead of 2615.
+
 ## Remote Server Setup
 If running on a remote server without a display, the following setup will be needed to run episode replay, model inference of any model training that invokes the simulator (student forcing / RL). 
 

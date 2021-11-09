@@ -162,6 +162,12 @@ def process_arguments():
     )
     parser.add_argument("--create_video", action="store_true", help="Whether to write a video into the frames dir")
     parser.add_argument(
+        "--font_fn",
+        type=str,
+        default="/System/Library/Fonts/SFNSMono.ttf",
+        help="Path to a font file to be used during video stitch.",
+    )
+    parser.add_argument(
         "--status_out_fn",
         type=str,
         default="replay_stats.json",

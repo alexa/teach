@@ -16,7 +16,7 @@ logger = create_logger(__name__, logging.WARNING)
 
 class Dataset:
     def __init__(self, task_type=None, definitions=None, comments="", version=None, tasks=None):
-        self.version = "1.0" if version is None else version
+        self.version = "2.0" if version is None else version
         self.task_type = task_type
         self.comments = comments
         self.definitions = Definitions(definitions=definitions, version=version) if definitions is None else definitions
@@ -36,7 +36,7 @@ class Dataset:
         return _dict
 
     @classmethod
-    def from_dict(cls, dataset_dict, process_init_state=True, version=None) -> "Dataset":
+    def from_dict(cls, dataset_dict, process_init_state=True, version="2.0") -> "Dataset":
         definitions = Definitions(dataset_dict["definitions"])
         if version == "2.0":
             tasks = [
@@ -65,7 +65,7 @@ class Dataset:
             json.dump(self.to_dict(), f, indent=indent)
 
     @classmethod
-    def import_json(cls, file_name, process_init_state=True, version=None) -> "Dataset":
+    def import_json(cls, file_name, process_init_state=True, version="2.0") -> "Dataset":
         with open(file_name) as f:
             dataset_dict = json.load(f, object_pairs_hook=OrderedDict)
             return Dataset.from_dict(dataset_dict, process_init_state, version=version)

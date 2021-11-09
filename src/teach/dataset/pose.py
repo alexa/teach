@@ -54,7 +54,16 @@ class Pose_With_ID:
             identity = pose_with_id_dict["object_id"]
         elif "thirdPartyCameraId" in pose_with_id_dict:
             identity = pose_with_id_dict["thirdPartyCameraId"]
-        else:
+        elif "agent_id" in pose_with_id_dict:
             identity = pose_with_id_dict["agent_id"]
+        else:
+            identity = 1
 
-        return cls(identity=identity, pose=Pose.from_array(pose_with_id_dict["pose"]), is_object=is_object)
+        if "pose" in pose_with_id_dict:
+            pose = Pose.from_array(pose_with_id_dict["pose"])
+        else:
+            pose = Pose.from_array(
+                list(pose_with_id_dict["position"].values()) + list(pose_with_id_dict["rotation"].values())
+            )
+
+        return cls(identity=identity, pose=pose, is_object=is_object)

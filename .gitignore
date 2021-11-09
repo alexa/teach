@@ -7,3 +7,5 @@ __pycache__/
 build
 dist
 *.egg-info/
+src/teach/analysis/.ipynb_checkpoints/
+pip-wheel-metadata/

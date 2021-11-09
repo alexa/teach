@@ -73,7 +73,7 @@ class EpisodeReplayWorker(Process):
             replay_status[game_fn]["task_success"] = int(task_succ)
             self.update_playback_status(api_succ, task_succ, game_fn)
             if cmd_args.create_video:
-                er.stitch_episode_video(frame_dir)
+                er.stitch_episode_video(frame_dir, cmd_args.font_fn)
             self.write_out_status()
         except (KeyboardInterrupt, SystemExit):
             self.update_error_status(game_fn, "interrupt")

@@ -28,4 +28,4 @@ class SimulatorFactory:
 
 
 factory = SimulatorFactory()
-factory.register('thor', SimulatorTHOR)
+factory.register("thor", SimulatorTHOR)

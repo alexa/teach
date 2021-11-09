@@ -108,7 +108,7 @@ class EpisodeReplay:
 
         return api_success, task_success
 
-    def stitch_episode_video(self, obs_dir, force_replay=False):
+    def stitch_episode_video(self, obs_dir, font_fn, force_replay=False):
         """
         Stitch together a video of the episode for demo/inspection purposes.
         obs_dir - the observations to read in
@@ -183,7 +183,7 @@ class EpisodeReplay:
                         fill="black",
                     )
                     font_size = 64
-                    font = ImageFont.truetype("/System/Library/Fonts/SFNSMono.ttf", font_size)
+                    font = ImageFont.truetype(font_fn, font_size)
                     s = "%s: %s" % (frame_type, json.dumps(contents))
                     line_idx = 0
                     chars_per_line = 44

@@ -14,7 +14,7 @@ from teach.meta_data_files import task_definitions
 
 
 class Definitions:
-    def __init__(self, definitions=None, simulator="THOR", version="1.0"):
+    def __init__(self, definitions=None, simulator="THOR", version="2.0"):
         self.simulator = simulator
         self.version = version
         if definitions is None:
