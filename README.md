@@ -34,8 +34,11 @@ directory (`/tmp/teach-dataset`).
 - `-sd`/`--skip-download`: If set, skip downloading archive files.
 - `-f`/`--file`: Specify the file name to be retrieved from S3 bucket.
 
-Recent file changes: Two game files, and their corresponding EDH and TfD instances were deleted from the `valid_unseen` split due to issues with the game files. 
-As a result, the `valid_unseen` split now has 612 gameplay sessions and TfD instances instead of 614, and 2603 EDH instances instead of 2615.
+File changes (12/28/2022): 
+We have modified EDH instances so that the state changes checked for to evaluate success are only those that contribute towards task success in the main task of the gameplay session the EDH instance is created from. 
+We have removed EDH instances that had no state changes meeting these requirements. 
+Additionally, two game files, and their corresponding EDH and TfD instances were deleted from the `valid_unseen` split due to issues in the game files. 
+Version 3 of our paper on Arxiv, which will be public on Dec 30, 2022 contains the updated dataset size and experimental results.  
 
 ## Remote Server Setup
 If running on a remote server without a display, the following setup will be needed to run episode replay, model inference of any model training that invokes the simulator (student forcing / RL). 
