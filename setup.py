@@ -26,10 +26,11 @@ setup(
             "teach_eval = teach.cli.eval:main",
             "teach_inference = teach.cli.inference:main",
             "teach_replay = teach.cli.replay:main",
+            "teach_api = teach.cli.api:main",
         ]
     },
     include_package_data=True,
-    python_requires=">=3.6",
+    python_requires=">=3.7",
     zip_safe=False,
     install_requires=[
         "ai2thor==3.1.0",

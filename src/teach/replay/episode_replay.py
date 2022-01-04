@@ -363,6 +363,7 @@ class EpisodeReplay:
 
     def _set_up_new_episode(self, obs_dir, turn_on_lights, task=None):
         api_success = True
+        self.simulator.reset_stored_data()
         logger.info("Starting episode...")
         self.simulator.start_new_episode(
             world=self.episode.world,

@@ -111,6 +111,17 @@ class SimulatorBase:
     def set_task_by_name(self, task_name: str, task_params=None, comments=""):
         raise NotImplementedError("Derived class must implement this!")
 
+    def reset_stored_data(self):
+        """
+        This removes data of previous tasks / episodes from the simulator object and should be used with caution
+        This should precede calls to start_new_episode() and set_task() to ensure that a future call to save() or done()
+        will save session data properly.
+        """
+        logger.info("Resetting dataset object and removing previously stored episodes...")
+        task_type = self._dataset.task_type
+        comments = self._dataset.comments
+        self._dataset = Dataset(task_type=task_type, definitions=None, comments=comments, version="2.0")
+
     def start_new_episode(
         self,
         world=None,

@@ -3,6 +3,7 @@
 
 
 import logging
+import sys
 
 from teach.settings import get_settings
 
@@ -18,4 +19,8 @@ def create_logger(name: str = None, level=logging.DEBUG):
         logging.basicConfig(level=logging.DEBUG)
         logger = logging.getLogger(name if name else __name__)
         logger.setLevel(level)
+        handler = logging.StreamHandler(sys.stdout)
+        formatter = logging.Formatter("[%(threadName)s-%(process)s-%(levelname)s] %(name)s: %(message)s")
+        handler.setFormatter(formatter)
+        logger.addHandler(handler)
         return logger

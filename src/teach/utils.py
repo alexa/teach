@@ -4,9 +4,11 @@
 
 import copy
 import json
+import os
 from pathlib import Path
 
 import numpy as np
+from PIL import Image
 
 from teach.dataset.task_THOR import Task_THOR
 from teach.logger import create_logger
@@ -378,3 +380,19 @@ def dynamically_load_class(package_path, class_name):
     module = __import__(package_path, fromlist=[class_name])
     klass = getattr(module, class_name)
     return klass
+
+
+def load_images(image_dir, image_file_names):
+    images = list()
+    if not image_file_names:
+        return images
+    if not os.path.exists(image_dir):
+        raise Exception(f"{image_dir} doesn't exist")
+    for f in image_file_names:
+        image_file = os.path.join(image_dir, f)
+        if not os.path.exists(image_file):
+            continue
+        image_orig = Image.open(image_file)
+        images.append(image_orig.copy())
+        image_orig.close()
+    return images

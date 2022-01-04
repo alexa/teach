@@ -424,6 +424,24 @@ class SimulatorTHOR(SimulatorBase):
             custom_object_metadata=self.__custom_object_metadata,
         )
 
+    def save(self, file_name=None):
+        """
+        Save the session using the current state as the final simulator state. This does not shut down the simulator.
+        Call done() instead if simulator should be shut down after this
+        :param file_name: If file_name is not None, the simulator session is saved in the same format as original games
+        """
+        # Add final state to log.
+        state = self.get_scene_object_locs_and_states()
+        self.current_episode.final_state = Initialization(
+            time_start=time.time() - self.start_time,
+            agents=state["agents"],
+            objects=state["objects"],
+            custom_object_metadata=self.__custom_object_metadata,
+        )
+
+        # Save log file
+        super().save(file_name=file_name)
+
     def done(self, file_name=None):
         """
         Shut down the simulator and save the session with final simulator state; Should be called at end of collection/
@@ -1806,20 +1824,24 @@ class SimulatorTHOR(SimulatorBase):
         reliability and checks that a container just got placed in a coffee maker and the coffee maker was on
         """
         cur_objects = self.get_objects(event)
-        coffee_makers = [obj for obj in cur_objects if "CoffeeMachine" in obj["objectType"]]
-        coffee_maker_ids = set([obj["objectId"] for obj in coffee_makers])
+        coffee_maker_ids = set(
+            [obj["objectId"] for obj in cur_objects if "CoffeeMachine" in obj["objectType"] and obj["isToggled"]]
+        )
         for obj in cur_objects:
+            prev_filled_with_liquid = False
             if objs_before_event is not None:
                 prev_state = self.__get_object_by_id(objs_before_event, obj["objectId"])
-            else:
-                prev_state = None
+                if prev_state:
+                    prev_filled_with_liquid = prev_state["isFilledWithLiquid"]
             parent_receptacles = self.get_parent_receptacles(obj, cur_objects)
+            placed_in_toggled_coffee_maker = False
+            if parent_receptacles is not None and len(set(parent_receptacles).intersection(coffee_maker_ids)) > 0:
+                placed_in_toggled_coffee_maker = True
             if (
-                parent_receptacles is not None
-                and len(set(parent_receptacles).intersection(coffee_maker_ids)) > 0
+                placed_in_toggled_coffee_maker
                 and obj["canFillWithLiquid"]
                 and obj["isFilledWithLiquid"]
-                and (prev_state is None or not prev_state["isFilledWithLiquid"])
+                and not prev_filled_with_liquid
             ):
                 self.__update_custom_object_metadata(obj["objectId"], "simbotIsFilledWithCoffee", True)
 
@@ -1852,13 +1874,15 @@ class SimulatorTHOR(SimulatorBase):
 
         for child_obj in objs_in_sink:
             if child_obj["isDirty"]:
-                ac = dict(action="CleanObject", objectId=child_obj["objectId"])
+                ac = dict(action="CleanObject", objectId=child_obj["objectId"], forceAction=True)
                 if debug_print_all_sim_steps:
                     logger.info("step %s", ac)
                 self.controller.step(ac)
 
             if child_obj["canFillWithLiquid"]:
-                ac = dict(action="FillObjectWithLiquid", objectId=child_obj["objectId"], fillLiquid="water")
+                ac = dict(
+                    action="FillObjectWithLiquid", objectId=child_obj["objectId"], fillLiquid="water", forceAction=True
+                )
                 if debug_print_all_sim_steps:
                     logger.info("step %s", ac)
                 self.controller.step(ac)

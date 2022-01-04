@@ -10,6 +10,7 @@ import tarfile
 import boto3
 from botocore import UNSIGNED
 from botocore.config import Config
+from tqdm import tqdm
 
 DEFAULT_DATASET_BUCKET_NAME = "teach-dataset"
 DEFAULT_DIRECTORY = "/tmp/teach-dataset"
@@ -19,7 +20,24 @@ FILE_LIST = [
     "experiment_games.tar.gz",
     "images_and_states.tar.gz",
     "tfd_instances.tar.gz",
+    "baseline_models.tar.gz",
+    "et_pretrained_models.tar.gz",
 ]
+
+
+def update_download_progressbar(t):
+    def inner(bytes_amount):
+        t.update(bytes_amount)
+
+    return inner
+
+
+def download_with_progressbar(s3_resource, bucket_name, key, directory):
+    file_object = s3_resource.Object(bucket_name=bucket_name, key=key)
+    total_file_size = file_object.content_length
+    bucket = s3_resource.Bucket(bucket_name)
+    with tqdm(total=total_file_size, unit="B", unit_scale=True, desc=key) as t:
+        bucket.download_file(Key=key, Filename=f"{directory}/{key}", Callback=update_download_progressbar(t))
 
 
 def download_dataset(directory, key=None, bucket_name=DEFAULT_DATASET_BUCKET_NAME):
@@ -31,17 +49,22 @@ def download_dataset(directory, key=None, bucket_name=DEFAULT_DATASET_BUCKET_NAM
         if not os.path.exists(directory):
             os.makedirs(directory)
         s3_resource = boto3.resource("s3", region_name="us-east-1", config=Config(signature_version=UNSIGNED))
-        bucket = s3_resource.Bucket(bucket_name)
         if key:
             print(f"Downloading s3://{bucket_name}/{key} to {directory}")
-            bucket.download_file(Key=key, Filename=f"{directory}/{key}")
+            download_with_progressbar(s3_resource, bucket_name, key, directory)
         else:
             for file_name in FILE_LIST:
                 print(f"Downloading s3://{bucket_name}/{file_name} to {directory}")
-                bucket.download_file(Key=file_name, Filename=f"{directory}/{file_name}")
+                download_with_progressbar(s3_resource, bucket_name, file_name, directory)
     except Exception as e:
         print(f"Exception reading from: {bucket_name}")
         print(f"Exception: {str(e)}")
+
+
+def extract_all_with_progress(archive, directory):
+    members = archive.getmembers()
+    for member in tqdm(iterable=members, total=len(members)):
+        archive.extract(member=member, path=directory)
 
 
 def extract_dataset(directory, file_name=None):
@@ -50,14 +73,15 @@ def extract_dataset(directory, file_name=None):
     """
     print(f"Extracting dataset to {directory}")
     if file_name:
+        print(f"Extracting file: {file_name}")
         with tarfile.open(os.path.join(directory, file_name)) as archive:
-            archive.extractall(directory)
-        print(f"Extracted file: {file_name}")
+            extract_all_with_progress(archive, directory)
+
     else:
         for file_name in FILE_LIST:
+            print(f"Extracting file: {file_name}")
             with tarfile.open(os.path.join(directory, file_name)) as archive:
-                archive.extractall(directory)
-            print(f"Extracted file: {file_name}")
+                extract_all_with_progress(archive, directory)
 
 
 def process_arguments():
@@ -105,7 +129,7 @@ def main():
 
     print("Input directory:", directory)
     print("Input skip-extract:", skip_extract)
-    print("Input skip-download:", skip_extract)
+    print("Input skip-download:", skip_download)
     print("Input file:", file_name)
 
     if not skip_download:

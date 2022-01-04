@@ -9,3 +9,4 @@ dist
 *.egg-info/
 src/teach/analysis/.ipynb_checkpoints/
 pip-wheel-metadata/
+*.pyc

@@ -14,10 +14,14 @@ def evaluate_traj(success, edh_instance, traj_len, final_gc_total, final_gc_sati
         edh_instance["expected_init_goal_conditions_total"], edh_instance["expected_init_goal_conditions_satisfied"]
     )
     final_gc_satisfied = min(final_gc_total, final_gc_satisfied)
-    goal_condition_success_rate = 1.0 - (
-        (final_gc_total - final_gc_satisfied)
-        / (edh_instance["expected_init_goal_conditions_total"] - init_gc_satisfied)
-    )
+
+    total_goal_conditions = edh_instance["expected_init_goal_conditions_total"] - init_gc_satisfied
+    # TODO: Remove this after testing and recheck EDH instances to remove any where there is nothing to do
+    if total_goal_conditions != 0:
+        unsatisfied_goal_conditions = final_gc_total - final_gc_satisfied
+        goal_condition_success_rate = 1.0 - (unsatisfied_goal_conditions / total_goal_conditions)
+    else:
+        goal_condition_success_rate = 1
 
     # SPL
     gt_path_len = len(edh_instance["driver_actions_future"])
@@ -35,7 +39,7 @@ def evaluate_traj(success, edh_instance, traj_len, final_gc_total, final_gc_sati
         "path_len_weighted_success_spl": float(plw_s_spl),
         "goal_condition_spl": float(pc_spl),
         "path_len_weighted_goal_condition_spl": float(plw_pc_spl),
-        "path_len_weight": int(gt_path_len),
+        "gt_path_len": int(gt_path_len),
         "success": int(success),
         "traj_len": int(traj_len),
     }
@@ -135,6 +139,7 @@ def load_traj_metrics(output_file, pred_actions_file, args):
     traj_metrics = create_new_traj_metrics(edh_instance)
     traj_metrics["game_id"] = edh_instance["game_id"]
     traj_metrics["instance_id"] = edh_instance["instance_id"]
+    traj_metrics["gt_path_len"] = len(edh_instance["driver_actions_future"])
     traj_metrics.update(
         evaluate_traj(
             success, edh_instance, len(pred_actions), final_goal_conditions_total, final_goal_conditions_satisfied

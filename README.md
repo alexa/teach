@@ -4,7 +4,7 @@
 Aishwarya Padmakumar*, Jesse Thomason*, Ayush Shrivastava, Patrick Lange, Anjali Narayan-Chen, Spandana Gella, Robinson Piramuthu, Gokhan Tur, Dilek Hakkani-Tur
 
 TEACh is a dataset of human-human interactive dialogues to complete tasks in a simulated household environment. 
-The code is licensed under the MIT License (see SOFTWARELICENSE), images are licensed under Apache 2.0 
+The code and model weights are licensed under the MIT License (see SOFTWARELICENSE), images are licensed under Apache 2.0 
 (see IMAGESLICENSE) and other data files are licensed under CDLA-Sharing 1.0 (see DATALICENSE).
 Please include appropriate licensing and attribution when using our data and code, and please cite our paper.
 
@@ -113,7 +113,262 @@ teach_eval \
     --inference_output_dir $OUTPUT_DIR \
     --split valid_seen \
     --metrics_file $METRICS_FILE
+```    
+
+## TEACh Benchmark Challenge
+
+For participation in the challenge, you will need to submit a docker image container your code and model.
+Docker containers using your image will serve your model as HTTP API following the [TEACh API Specification](#TEACh API Specification).
+For your convenience, we included the `teach_api` command which implements this API and is compatible with models implementing `teach.inference.teach_model.TeachModel` also used by `teach_inference`.
+
+We have also included two sample Docker images using `teach.inference.sample_model.SampleModel` and `teach.inference.et_model.ETModel` respectively in 
+[`docker/`](./docker).
+
+When evaluating a submissions, the submitted container will be started with access to a single GPU and no internet access. For details see [Step 3 - Start your container](#step-3---start-your-container).
+
+The main evaluation code invoking your submission will also be run as Docker container. It reuses the `teach_inference` CLI command together with `teach.inference.remote_model.RemoteModel` to call the HTTP API running in your container. For details on how to start it locally see [Step 4 - Start the evaluation](#step-4---start-the-evaluation).
+
+### Testing Locally
+
+Assuming you have [downloaded the data](#downloading-the-dataset) to `/home/ubuntu/teach-dataset` and followed [Prerequisites](#prerequisites) and [Remote Server Setup](#remote-server-setup).
+
+
+#### Step 0 - Setup Environment
+
+```buildoutcfg
+export HOST_DATA_DIR=/home/ubuntu/teach-dataset
+export HOST_IMAGES_DIR=/home/ubuntu/images
+export HOST_OUTPUT_DIR=/home/ubuntu/output
+export API_PORT=5000
+export SUBMISSION_PK=168888
+export INFERENCE_GPUS='"device=0"'
+export API_GPUS='"device=1"'
+export SPLIT=valid_seen
+export DOCKER_NETWORK=no-internet
+
+mkdir -p $HOST_IMAGES_DIR $HOST_OUTPUT_DIR
+docker network create --driver=bridge --internal $DOCKER_NETWORK
 ```
+Note: If you run on a machine that only has a single GPU, set `API_GPUS='"device=0"'`.
+
+#### Step 1 - Build the `remote-inference-runner` container
+
+```buildoutcfg
+docker build -t remote-inference-runner -f docker/Dockerfile.RemoteInferenceRunner .
+```
+
+#### Step 2 - Build your container
+
+Note: When customizing the images for your own usage, do not edit the following or your submission will fail:
+- `teach_api` options: `--data_dir /data --images_dir /images --split $SPLIT`
+- `EXPOSE 5000` and don't change the port the flask API listens on
+
+For the `SampleModel` example, the corresponding command is:
+
+```buildoutcfg
+docker build -t teach-model-api-samplemodel -f docker/Dockerfile.TEAChAPI-SampleModel .
+```
+
+For the `baseline models`, follow the corresponding command replacing `MODEL_VARIANT=et` with 
+the desired variant e.g. `et_plus_a`.
+
+```buildoutcfg
+mkdir -p ./models
+mv $HOST_DATA_DIR/baseline_models ./models/
+mv $HOST_DATA_DIR/et_pretrained_models ./models/
+docker build --build-arg MODEL_VARIANT=et -t teach-model-api-etmodel -f docker/Dockerfile.TEAChAPI-ETModel .
+```
+
+#### Step 3 - Start your container
+
+For the `SampleModel` example, the corresponding command is:
+
+```buildoutcfg
+docker run -d --rm \
+    --gpus $API_GPUS \
+    --name TeachModelAPI \
+    --network $DOCKER_NETWORK \
+    -e SPLIT=$SPLIT \
+    -v $HOST_DATA_DIR:/data:ro \
+    -v $HOST_IMAGES_DIR/$SUBMISSION_PK:/images:ro \
+    -t teach-model-api-samplemodel    
+```
+
+For the baseline models, just replace the image name e.g. if you followed the commands above
+
+```buildoutcfg
+docker run -d --rm \
+    --gpus $API_GPUS \
+    --name TeachModelAPI \
+    --network $DOCKER_NETWORK \
+    -e SPLIT=$SPLIT \
+    -v $HOST_DATA_DIR:/data:ro \
+    -v $HOST_IMAGES_DIR/$SUBMISSION_PK:/images:ro \
+    -t teach-model-api-etmodel    
+```
+
+Verify the API is running with
+
+```buildoutcfg
+docker exec TeachModelAPI curl @TeachModelAPI:5000/ping
+
+Output:
+{"action":"Look Up","obj_relative_coord":[0.1,0.2]}
+```
+
+#### Step 4 - Start the evaluation
+
+```buildoutcfg
+docker run --rm \
+    --privileged \
+    -e DISPLAY=:0 \
+    -e NVIDIA_DRIVER_CAPABILITIES=all \
+    --name RemoteInferenceRunner \
+    --network $DOCKER_NETWORK \
+    --gpus $INFERENCE_GPUS \
+    -v /tmp/.X11-unix:/tmp/.X11-unix:ro \
+    -v $HOST_DATA_DIR:/data:ro \
+    -v $HOST_IMAGES_DIR/$SUBMISSION_PK:/images \
+    -v $HOST_OUTPUT_DIR/$SUBMISSION_PK:/output \
+    remote-inference-runner teach_inference \
+        --data_dir /data \
+        --output_dir /output \
+        --images_dir /images \
+        --split $SPLIT \
+        --metrics_file /output/metrics_file \
+        --model_module teach.inference.remote_model \
+        --model_class RemoteModel \
+        --model_api_host_and_port "@TeachModelAPI:$API_PORT"
+```
+
+#### Step 5 - Results
+
+The evaluation metrics will be in `$HOST_OUTPUT_DIR/$SUBMISSION_PK/metrics_file`.
+Images for each episode will be in `$HOST_IMAGES_DIR/$SUBMISSION_PK`.
+
+### Running without docker
+
+You may want to test your implementation without rebuilding Docker images. You can test your model by directly calling the `teach_api` CLI command e.g.
+
+Using the `teach.inference.sample_model.SampleModel`:
+
+```buildoutcfg
+export DATA_DIR=/home/ubuntu/teach-dataset
+export IMAGE_DIR=/tmp/images
+
+teach_api \
+    --data_dir $DATA_DIR \
+    --images_dir $IMAGE_DIR
+```
+
+Using the `teach.inference.et_model.ETModel` assuming you already moved the models from the teach-dataset location to 
+`./models` following instructions in [Step 2 - Build your container](#step-2---build-your-container).
+
+```buildoutcfg
+export DATA_DIR=/home/ubuntu/teach-dataset
+export IMAGE_DIR=/tmp/images
+
+teach_api \
+    --data_dir $DATA_DIR \
+    --images_dir $IMAGE_DIR \
+    --split valid_seen \
+    --model_module teach.inference.et_model \
+    --model_class ETModel \
+    --model_dir ./models/baseline_models/et \
+    --visual_checkpoint ./models/et_pretrained_models/fasterrcnn_model.pth
+    --object_predictor ./models/et_pretrained_models/maskrcnn_model.pth \
+    --seed 4 
+```
+
+The corresponding command for running `teach_inference` against such an API
+without container uses `teach.inference.remote_model.RemoteModel`.
+
+```buildoutcfg
+export DATA_DIR=/home/ubuntu/teach-dataset
+export OUTPUT_DIR=/home/ubuntu/output/valid_seen
+export METRICS_FILE=/home/ubuntu/output/valid_seen/metrics
+export IMAGE_DIR=/tmp/images
+
+teach_inference \
+    --data_dir $DATA_DIR  \
+    --output_dir $OUTPUT_DIR \    
+    --split valid_seen \
+    --metrics_file $METRICS_FILE \    
+    --model_module teach.inference.remote_model \
+    --model_class RemoteModel \        
+    --model_api_host_and_port 'localhost:5000' \
+    --images_dir $IMAGE_DIR
+    
+```
+
+### Smaller split
+
+It may be useful for faster turn around time to locally create a smaller split in `$DATA_DIR/edh_instances/test_seen` 
+with a handful of files from `$DATA_DIR/edh_instances/valid_seen` for faster turn around times. 
+
+### Runtime Checks
+
+The TEACh Benchmark Challenge places a maximum time limit of 36 hours when using all GPUs of a `p3.16xlarge` instance.
+The best way to verify that your code is likely to satisfy this requirement would be to use a script to run two Docker evaluation processes in sequence on a `p3.16xlarge` EC2 instance, one for the `valid_seen` split and one for the `valid_unseen` split.
+Note that you will need to specify `export API_GPUS='"device=1,2,3,4,5,6,7"'` (we reserve GPU 0 for `ai2thor` in our runs) to use all GPUs and your model code will need to place different instances of the model on different GPUs for this test (see the use of `process_index` in `ETModel.set_up_model()` for an example).
+Also note that while the test splits are close in size to the validation splits, they are not identical so your runtime estimate will necessarily be an approximation. 
+
+### TEACh API Specification
+
+As mentioned above, `teach_api` already implements this API and it is usually not necessary to implement this yourself. During evaluations of submissions, edh_instances without ground truth and images corresponding to the edh_instances' histories will be available in `/data`. `/images` will contain images produced during inference at runtime. `teach_api` already handles loading and passes them to your implementation of `teach.inference.teach_model.TeachModel`.
+
+#### Start EDH Instance
+
+This endpoint will be called once at the start of processing a new EDH instance. Currently, we ensure that the API processes only a single EDH instance from start to finish i.e. once called it can be assumed that the previous EDH instance has completed.
+
+URL : `/start_new_edh_instance`  
+Method : `POST`  
+Payload:  
+
+```json
+{
+    "edh_name": "[name of the EDH instance file]"
+}
+```
+
+Responses:
+
+Status Code: `200`  
+Response: `success`
+
+Status Code: `500`  
+Response: `[error message]`
+
+
+#### Get next action
+
+This endpoint will be called at each timestep during inference to get the next predicted action from the model.
+
+URL : `/get_next_action`  
+Method : `POST`  
+Payload:  
+
+```json
+{
+    "edh_name": "[name of the EDH instance file]",
+    "img_name": "[name of the image taken in the simulator after the previous action]",
+    "prev_action": "[JSON string representation of previous action]", // this is optional
+}
+```
+
+Responses:
+
+Status Code: `200`  
+
+```json
+{
+    "action": "[An action name from all_agent_actions]",
+    "obj_relative_coord": [0.1, 0.5] // see teach.inference.teach_model.TeachModel.get_next_action
+}
+```
+
+Status Code: `500`  
+Response: `[error message]`
 
 ## Security
 
@@ -123,3 +378,5 @@ See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more inform
 
 The code is licensed under the MIT License (see SOFTWARELICENSE), images are licensed under Apache 2.0 
 (see IMAGESLICENSE) and other data files are licensed under CDLA-Sharing 1.0 (see DATALICENSE).
+
+

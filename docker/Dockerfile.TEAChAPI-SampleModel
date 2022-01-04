@@ -1,0 +1,16 @@
+FROM python:3.8
+
+# upgrade pip to latest version
+RUN curl -s https://bootstrap.pypa.io/get-pip.py -o get-pip.py && \
+    python3 get-pip.py --force-reinstall && \
+    rm get-pip.py
+
+COPY ./requirements.txt ./requirements.txt
+RUN pip install -r requirements.txt
+COPY . .
+RUN pip install -e .
+EXPOSE 5000
+
+ENV SPLIT=valid_seen
+
+CMD teach_api --model_module teach.inference.sample_model --model_class SampleModel --data_dir /data --images_dir /images --split $SPLIT --seed 4

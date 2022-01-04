@@ -2,11 +2,12 @@
 
 # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 # SPDX-License-Identifier: MIT-0
-
-import argparse
+import glob
 import json
+import multiprocessing as mp
 import os
 from argparse import ArgumentParser
+from datetime import datetime
 
 from teach.eval.compute_metrics import aggregate_metrics
 from teach.inference.inference_runner import InferenceRunner, InferenceRunnerConfig
@@ -25,6 +26,18 @@ def main():
         help='Base data directory containing subfolders "games" and "edh_instances',
     )
     arg_parser.add_argument(
+        "--images_dir",
+        type=str,
+        required=True,
+        help="Images directory for episode replay output",
+    )
+    arg_parser.add_argument(
+        "--use_img_file",
+        dest="use_img_file",
+        action="store_true",
+        help="synchronous save images with model api use the image file instead of streaming image",
+    )
+    arg_parser.add_argument(
         "--output_dir",
         type=str,
         required=True,
@@ -34,8 +47,8 @@ def main():
         "--split",
         type=str,
         default="valid_seen",
-        choices=["train", "valid_seen", "valid_unseen"],
-        help="One of train, valid_seen, valid_unseen",
+        choices=["train", "valid_seen", "valid_unseen", "test_seen", "test_unseen"],
+        help="One of train, valid_seen, valid_unseen, test_seen, test_unseen",
     )
     arg_parser.add_argument(
         "--edh_instance_file",
@@ -72,33 +85,49 @@ def main():
         "--model_class", type=str, default="SampleModel", help="Name of the TeachModel class to use during inference."
     )
     arg_parser.add_argument(
-        "model_args", nargs=argparse.REMAINDER, help="Any unknown arguments will be captured and passed to the model"
+        "--replay_timeout", type=int, default=500, help="The timeout for playing back the interactions in an episode."
     )
-    args = arg_parser.parse_args()
+
+    start_time = datetime.now()
+    args, model_args = arg_parser.parse_known_args()
 
     if args.edh_instance_file:
         edh_instance_files = [args.edh_instance_file]
     else:
+        inference_output_files = glob.glob(os.path.join(args.output_dir, "inference__*.json"))
+        finished_edh_instance_files = [os.path.join(fn.split("__")[1]) for fn in inference_output_files]
         edh_instance_files = [
             os.path.join(args.data_dir, "edh_instances", args.split, f)
             for f in os.listdir(os.path.join(args.data_dir, "edh_instances", args.split))
+            if f not in finished_edh_instance_files
         ]
+        if not edh_instance_files:
+            print(
+                f"all the edh instances have been ran for input_dir={os.path.join(args.data_dir, 'edh_instances', args.split)}"
+            )
+            exit(1)
 
     runner_config = InferenceRunnerConfig(
         data_dir=args.data_dir,
         split=args.split,
         output_dir=args.output_dir,
+        images_dir=args.images_dir,
         metrics_file=args.metrics_file,
         num_processes=args.num_processes,
         max_init_tries=args.max_init_tries,
         max_traj_steps=args.max_traj_steps,
         max_api_fails=args.max_api_fails,
         model_class=dynamically_load_class(args.model_module, args.model_class),
-        model_args=args.model_args,
+        replay_timeout=args.replay_timeout,
+        model_args=model_args,
+        use_img_file=args.use_img_file,
     )
 
     runner = InferenceRunner(edh_instance_files, runner_config)
     metrics = runner.run()
+    inference_end_time = datetime.now()
+    logger.info("Time for inference: %s" % str(inference_end_time - start_time))
+
     results = aggregate_metrics(metrics, args)
     print("-------------")
     print(
@@ -121,10 +150,17 @@ def main():
     print("PLW GC: %.3f" % (results["path_length_weighted_goal_condition_success_rate"]))
     print("-------------")
 
-    results["traj_metrics"] = metrics
+    results["traj_stats"] = metrics
     with open(args.metrics_file, "w") as h:
-        json.dump(metrics, h)
+        json.dump(results, h)
+
+    end_time = datetime.now()
+    logger.info("Total time for inference and evaluation: %s" % str(end_time - start_time))
 
 
 if __name__ == "__main__":
+    # Using spawn method, parent process creates a new and independent child process,
+    # which avoid sharing unnecessary resources.
+    # https://docs.python.org/3/library/multiprocessing.html#contexts-and-start-methods
+    mp.set_start_method("spawn", force=True)
     main()

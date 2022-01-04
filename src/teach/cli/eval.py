@@ -36,8 +36,8 @@ def main():
         "--split",
         type=str,
         default="valid_seen",
-        choices=["train", "valid_seen", "valid_unseen"],
-        help="One of train, valid_seen, valid_unseen",
+        choices=["train", "valid_seen", "valid_unseen", "test_seen", "test_unseen"],
+        help="One of train, valid_seen, valid_unseen, test_seen, test_unseen",
     )
     arg_parser.add_argument(
         "--max_init_tries",
@@ -105,7 +105,7 @@ def main():
 
     results["traj_stats"] = traj_stats
     with open(args.metrics_file, "w") as h:
-        json.dump(traj_stats, h)
+        json.dump(results, h)
 
 
 if __name__ == "__main__":

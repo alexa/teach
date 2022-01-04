@@ -1,0 +1,29 @@
+FROM python:3.8
+ARG MODEL_VARIANT et
+
+# download model files into et_models and copy over
+RUN mkdir -p et_models
+COPY models/baseline_models/$MODEL_VARIANT et_models
+
+# Download Faster RCNN and Mask RCNN and copy over
+RUN mkdir -p et_pretrained_models
+COPY models/et_pretrained_models et_pretrained_models
+
+# upgrade pip to latest version
+RUN curl -s https://bootstrap.pypa.io/get-pip.py -o get-pip.py && \
+    python3 get-pip.py --force-reinstall && \
+    rm get-pip.py
+
+COPY ./requirements.txt ./requirements.txt
+RUN pip install -r requirements.txt
+COPY . .
+RUN pip install -e .
+EXPOSE 5000
+
+ENV ET_ROOT=/src/teach/modeling/ET/
+ENV PYTHONPATH=/src:$ET_ROOT
+ENV SPLIT=valid_seen
+
+CMD teach_api --model_module teach.inference.et_model --model_class ETModel --data_dir /data --images_dir /images \
+--split $SPLIT --visual_checkpoint /et_pretrained_models/fasterrcnn_model.pth \
+--object_predictor /et_pretrained_models/maskrcnn_model.pth --model_dir /et_models
