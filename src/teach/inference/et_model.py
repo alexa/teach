@@ -111,6 +111,8 @@ class ETModel(TeachModel):
             )
             self.model.action_traj = torch.unsqueeze(self.model.action_traj, 0)
 
+        return True
+
     def get_next_action(self, img, edh_instance, prev_action, img_name=None, edh_name=None):
         """
         Sample function producing random actions at every time step. When running model inference, a model should be
