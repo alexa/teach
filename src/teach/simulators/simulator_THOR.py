@@ -222,10 +222,10 @@ class SimulatorTHOR(SimulatorBase):
         task.task_params = task_params
         self.set_task(task=task, task_params=task_params, comments=comments)
 
-    def __init_custom_object_metadata(self):
+    def __add_obj_classes_for_objs(self):
         """
-        After initializing a scene, update any necessary custom metadata (object properties not directly tracked by
-        AI2-THOR)
+        For each object in AI2-THOR metadata, update with manually defined object classes to be tracked in custom
+        properties
         """
         # Load custom object classes
         with importlib.resources.open_text(ai2thor_resources, "custom_object_classes.json") as file_handle:
@@ -246,6 +246,13 @@ class SimulatorTHOR(SimulatorBase):
                 cur_obj_classes += custom_object_classes[obj["objectType"]]
             self.__update_custom_object_metadata(obj["objectId"], "simbotObjectClass", cur_obj_classes)
 
+    def __init_custom_object_metadata(self):
+        """
+        Reset custom object metadata to initial state: erase previously tracked properties, add manual classes for all
+        objects and check for custom property updates from current state
+        """
+        self.__custom_object_metadata = dict()
+        self.__add_obj_classes_for_objs()
         self.__check_per_step_custom_properties()
 
     def __check_per_step_custom_properties(self, objs_before_step=None):
@@ -2670,7 +2677,9 @@ class SimulatorTHOR(SimulatorBase):
         """
         Return current state in the form of an instance of class Initialization defined in dataset.py
         """
-        self.__init_custom_object_metadata()
+        self.__add_obj_classes_for_objs()   # Add object classes for any newly created objects (eg: slices)
+        self.__check_per_step_custom_properties()   # Confirm whether any updates to custom properties need to be made
+                                                    # from last time step
         state = self.get_scene_object_locs_and_states()
         return Initialization(
             time_start=self.start_time,
