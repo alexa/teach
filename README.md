@@ -370,6 +370,21 @@ Status Code: `200`
 Status Code: `500`  
 Response: `[error message]`
 
+## TEACh EDH Offline Evaluation
+
+While the leaderboard for the TEACh EDH benchmark is not active, we recommend that researchers follow the following protocol for evaluation. 
+A split of the existing TEACh validation splits has been provided in the `src/teach/meta_data_files/divided_split` directory. 
+For your experiments, please use the `divided_val_seen` and `divided_val_unseen` splits for validation and `divided_test_seen` and `divided_test_unseen` for testing.
+Note that the TEACh code has not been modified at the moment to directly support use of these splits, so you will need to locally reorganize your data directory so that games, EDH instances and image folders are reorganized according to the divided split.
+Some additional notes:
+
+1. If you have previously tuned hyperparameters using the full TEACh validation split, you will need to re-tune hyperparameters on just the `divided_val_seen` or `divided_val_unseen` splits for fair comparison to other papers.
+2. The divided test splits are likely to be easier than the original TEACh test split as the floorplans used in the `divided_val_unseen` and `divided_test_unseen` splits are identical.
+3. Please do not incorporate the `divided_val_seen` or `divided_val_unseen` splits into your training set and retrain after hyperparameter tuning if using this protocol, as the `divided_test_unseen` split will then no longer be unseen. 
+4. We have observed that the ET model can show some variance when being retrained on ALFRED or TEACh even when changing only the random seeds, and as such we expect some performance differences between the full TEACh validation splits, TEACh test splits and divided splits. 
+5. Alexa Prize SimBot Challenge Participants please refer to challenge rules regarding publications.
+
+
 ## Security
 
 See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
