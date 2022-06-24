@@ -10,9 +10,11 @@ from argparse import ArgumentParser
 from datetime import datetime
 
 from teach.eval.compute_metrics import aggregate_metrics
-from teach.inference.inference_runner import InferenceRunner, InferenceRunnerConfig
+from teach.inference.inference_runner_base import InferenceRunnerConfig, InferenceBenchmarks
+from teach.inference.edh_inference_runner import EdhInferenceRunner
+from teach.inference.tfd_inference_runner import TfdInferenceRunner
 from teach.logger import create_logger
-from teach.utils import dynamically_load_class
+from teach.utils import dynamically_load_class, save_json
 
 logger = create_logger(__name__)
 
@@ -23,7 +25,7 @@ def main():
         "--data_dir",
         type=str,
         required=True,
-        help='Base data directory containing subfolders "games" and "edh_instances',
+        help='Base data directory containing subfolders "games" and one of "edh_instances" or "tfd_instances"',
     )
     arg_parser.add_argument(
         "--images_dir",
@@ -41,21 +43,20 @@ def main():
         "--output_dir",
         type=str,
         required=True,
-        help="Directory to store output files from playing EDH instances",
+        help="Directory to store output files from running inference",
     )
     arg_parser.add_argument(
         "--split",
         type=str,
         default="valid_seen",
-        choices=["train", "valid_seen", "valid_unseen", "test_seen", "test_unseen"],
-        help="One of train, valid_seen, valid_unseen, test_seen, test_unseen",
+        choices=["train", "valid_seen", "valid_unseen", "test_seen", "test_unseen", "divided_val_seen",
+                 "divided_val_unseen", "divided_test_seen", "divided_test_unseen"],
+        help="One of train, valid_seen, valid_unseen, test_seen, test_unseen, divided_val_seen, divided_val_unseen, "
+             "divided_test_seen, divided_test_unseen",
     )
     arg_parser.add_argument(
-        "--edh_instance_file",
-        type=str,
-        help="Run only on this EDH instance. Split must be set appropriately to find corresponding game file.",
+        "--num_processes", type=int, default=1, help="Number of processes to use"
     )
-    arg_parser.add_argument("--num_processes", type=int, default=1, help="Number of processes to use")
     arg_parser.add_argument(
         "--max_init_tries",
         type=int,
@@ -87,24 +88,53 @@ def main():
     arg_parser.add_argument(
         "--replay_timeout", type=int, default=500, help="The timeout for playing back the interactions in an episode."
     )
+    arg_parser.add_argument(
+        "--benchmark", type=str, default="edh",
+        help="TEACh benchmark to run inference for; Supported values: %s" % str([e.value for e in InferenceBenchmarks])
+    )
+    arg_parser.add_argument(
+        "--edh_instance_file",
+        type=str,
+        help="Run only on this EDH instance. Split must be set appropriately to find corresponding game file.",
+    )
+    arg_parser.add_argument(
+        "--tfd_instance_file",
+        type=str,
+        help="Run only on this TfD instance. Split must be set appropriately to find corresponding game file.",
+    )
 
     start_time = datetime.now()
     args, model_args = arg_parser.parse_known_args()
+    
+    if args.benchmark == InferenceBenchmarks.EDH:
+        inference_runner_class = EdhInferenceRunner
+    elif args.benchmark == InferenceBenchmarks.TFD:
+        inference_runner_class = TfdInferenceRunner
+    else:
+        raise RuntimeError("Invalid valid for --benchmark; must be one of %s " % 
+                           str([e.value for e in InferenceBenchmarks]))
 
     if args.edh_instance_file:
-        edh_instance_files = [args.edh_instance_file]
+        input_files = [args.edh_instance_file]
+        args.benchmark = InferenceBenchmarks.EDH
+    elif args.tfd_instance_file:
+        input_files = [args.tfd_instance_file]
+        args.benchmark = InferenceBenchmarks.TFD
     else:
+        input_subdir = args.benchmark + "_instances"
         inference_output_files = glob.glob(os.path.join(args.output_dir, "inference__*.json"))
-        finished_edh_instance_files = [os.path.join(fn.split("__")[1]) for fn in inference_output_files]
-        edh_instance_files = [
-            os.path.join(args.data_dir, "edh_instances", args.split, f)
-            for f in os.listdir(os.path.join(args.data_dir, "edh_instances", args.split))
-            if f not in finished_edh_instance_files
+        finished_input_files = [
+            os.path.join(os.path.basename(fn).split("__")[1])
+            for fn in inference_output_files
         ]
-        if not edh_instance_files:
-            print(
-                f"all the edh instances have been ran for input_dir={os.path.join(args.data_dir, 'edh_instances', args.split)}"
-            )
+        input_files = [
+            os.path.join(args.data_dir, input_subdir, args.split, f)
+            for f in os.listdir(os.path.join(args.data_dir, input_subdir, args.split))
+            if f not in finished_input_files
+        ]
+        if not input_files:
+            logger.info("Inference completed for all instances in input_dir = %s" % os.path.join(
+                args.data_dir, input_subdir, args.split))
             exit(1)
 
     runner_config = InferenceRunnerConfig(
@@ -123,14 +153,14 @@ def main():
         use_img_file=args.use_img_file,
     )
 
-    runner = InferenceRunner(edh_instance_files, runner_config)
+    runner = inference_runner_class(input_files, runner_config)
     metrics = runner.run()
     inference_end_time = datetime.now()
     logger.info("Time for inference: %s" % str(inference_end_time - start_time))
 
     results = aggregate_metrics(metrics, args)
-    print("-------------")
-    print(
+    logger.info("-------------")
+    logger.info(
         "SR: %d/%d = %.3f"
         % (
             results["success"]["num_successes"],
@@ -138,7 +168,7 @@ def main():
             results["success"]["success_rate"],
         )
     )
-    print(
+    logger.info(
         "GC: %d/%d = %.3f"
         % (
             results["goal_condition_success"]["completed_goal_conditions"],
@@ -146,13 +176,14 @@ def main():
             results["goal_condition_success"]["goal_condition_success_rate"],
         )
     )
-    print("PLW SR: %.3f" % (results["path_length_weighted_success_rate"]))
-    print("PLW GC: %.3f" % (results["path_length_weighted_goal_condition_success_rate"]))
-    print("-------------")
+    logger.info("PLW SR: %.3f" % (results["path_length_weighted_success_rate"]))
+    logger.info(
+        "PLW GC: %.3f" % (results["path_length_weighted_goal_condition_success_rate"])
+    )
+    logger.info("-------------")
 
     results["traj_stats"] = metrics
-    with open(args.metrics_file, "w") as h:
-        json.dump(results, h)
+    save_json(results, args.metrics_file)
 
     end_time = datetime.now()
     logger.info("Total time for inference and evaluation: %s" % str(end_time - start_time))

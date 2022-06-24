@@ -114,6 +114,7 @@ teach_eval \
     --split valid_seen \
     --metrics_file $METRICS_FILE
 ```    
+To run TfD inference instead of EDH inference add `--benchmark tfd` to the inference command.
 
 ## TEACh Benchmark Challenge
 
@@ -127,6 +128,8 @@ We have also included two sample Docker images using `teach.inference.sample_mod
 When evaluating a submissions, the submitted container will be started with access to a single GPU and no internet access. For details see [Step 3 - Start your container](#step-3---start-your-container).
 
 The main evaluation code invoking your submission will also be run as Docker container. It reuses the `teach_inference` CLI command together with `teach.inference.remote_model.RemoteModel` to call the HTTP API running in your container. For details on how to start it locally see [Step 4 - Start the evaluation](#step-4---start-the-evaluation).
+
+Please note that TfD inference is not currently supported via Docker image. 
 
 ### Testing Locally
 

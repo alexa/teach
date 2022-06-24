@@ -28,7 +28,7 @@ pip install -r requirements.txt
 export PYTHONPATH=$TEACH_SRC_DIR:$ET_ROOT:$PYTHONPATH
 ```
 
-Download the ET pretrained checkpoint for Faster RCNN and Mask RCNN models
+Download the E.T. pretrained checkpoint for Faster RCNN and Mask RCNN models
 ```buildoutcfg
 wget http://pascal.inrialpes.fr/data2/apashevi/et_checkpoints.zip
 unzip et_checkpoints.zip
@@ -75,7 +75,49 @@ python src/teach/cli/inference.py \
     --split valid_seen \
     --metrics_file $INFERENCE_OUTPUT_PATH/metrics__teach_et_trial.json \
     --seed 4 \
-    --model_dir teach_et_trial \
-    --object_predictor $ET_LOGS/pretrained/maskrcnn_model.pth \
-    --device cpu
+    --model_dir $ET_LOGS/teach_et_trial \
+    --object_predictor $ET_LOGS/pretrained/maskrcnn_model.pth
 ```
+Note: If running on laptop on a small subset of the data, add `--device cpu`.
+
+
+# Episodic Transformer based TfD model
+
+Follow the steps from the section above till downloading E.T. pretrained models.
+
+Preprocess data for TfD:
+```buildoutcfg
+python -m alfred.data.create_lmdb \
+    with args.visual_checkpoint=$ET_LOGS/pretrained/fasterrcnn_model.pth \
+    args.data_input=tfd_instances \
+    args.task_type=tfd \
+    args.data_output=lmdb_tfd \
+    args.vocab_path=None
+```
+Note: If running on laptop on a small subset of the data, use `args.vocab_path=$ET_ROOT/files/human.vocab` and add `args.device=cpu`.
+
+Train TfD model (adjust the `train.epochs` value in this command to specify the number of desired train epochs)
+```buildoutcfg
+python -m alfred.model.train with exp.model=transformer \
+    exp.name=teach_et_tfd \
+    exp.data.train=lmdb_tfd \
+    train.epochs=20  \
+    train.seed=2
+```
+
+Evaluate the trained model
+```buildoutcfg
+cd $TEACH_ROOT_DIR
+python src/teach/cli/inference.py \
+    --model_module teach.inference.et_model \
+    --model_class ETModel \
+    --data_dir $ET_DATA \
+    --output_dir $INFERENCE_OUTPUT_PATH/inference__teach_et_tfd \
+    --split valid_seen \
+    --metrics_file $INFERENCE_OUTPUT_PATH/metrics__teach_et_tfd.json \
+    --seed 4 \
+    --model_dir $ET_LOGS/teach_et_tfd \
+    --object_predictor $ET_LOGS/pretrained/maskrcnn_model.pth \
+    --benchmark tfd
+```
+Note: If running on laptop on a small subset of the data, add `--device cpu`.

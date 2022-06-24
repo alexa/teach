@@ -90,8 +90,13 @@ class ETModel(TeachModel):
     def start_new_edh_instance(self, edh_instance, edh_history_images, edh_name=None):
         self.model.reset()
 
+        if "instance_id" in edh_instance:
+            data_util_traj_path = Path(os.path.join("test", edh_instance["instance_id"]))
+        else: # This is a TfD instance - ID comes from the game
+            data_util_traj_path = Path(os.path.join("test", edh_instance["game_id"]))
+
         self.cur_edh_instance = data_util.process_traj(
-            edh_instance, Path(os.path.join("test", edh_instance["instance_id"])), 0, self.preprocessor
+            edh_instance, data_util_traj_path, 0, self.preprocessor
         )
         feat_numpy = {"lang": GuidesEdhDataset.load_lang(self.cur_edh_instance)}
         _, self.input_dict, _ = data_util.tensorize_and_pad(

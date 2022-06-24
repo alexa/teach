@@ -16,6 +16,16 @@ from teach.logger import create_logger
 logger = create_logger(__name__)
 
 
+def load_json(filename):
+    with open(filename) as h:
+        return json.load(h)
+
+
+def save_json(obj, filename):
+    with open(filename, 'w') as h:
+        json.dump(obj, h)
+
+
 def reduce_float_precision(input_entry, num_places_to_retain=4, keys_to_exclude=None):
     if keys_to_exclude is None:
         keys_to_exclude = ["time_start"]
@@ -396,3 +406,10 @@ def load_images(image_dir, image_file_names):
         images.append(image_orig.copy())
         image_orig.close()
     return images
+
+
+def update_objs_with_custom_metadata(objs_list, objs_metadata_dict):
+    for obj in objs_list:
+        if obj["objectId"] in objs_metadata_dict:
+            obj.update(objs_metadata_dict[obj["objectId"]])
+    return objs_list

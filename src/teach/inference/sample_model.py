@@ -66,4 +66,4 @@ class SampleModel(TeachModel):
                                    edh_instance['driver_image_history'])
         :param edh_name: EDH instance file name
         """
-        pass
+        return True

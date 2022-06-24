@@ -80,7 +80,10 @@ class EpisodeReplay:
             logger.warn("play_episode skipping playback in non-empty dir '%s'" % obs_dir)
             return False, False
 
-        api_success, init_state = self._set_up_new_episode(obs_dir, turn_on_lights, task)
+        api_success, init_state = self.set_up_new_episode(
+            obs_dir, turn_on_lights, task
+        )
+        init_state_objects = self.simulator.get_objects()
 
         target_object_active = False
         for idx in range(len(self.episode.interactions)):
@@ -361,7 +364,7 @@ class EpisodeReplay:
                         % (logged_success, self.episode.interactions[idx].action.success)
                     )
 
-    def _set_up_new_episode(self, obs_dir, turn_on_lights, task=None):
+    def set_up_new_episode(self, obs_dir=None, turn_on_lights=False, task=None):
         api_success = True
         self.simulator.reset_stored_data()
         logger.info("Starting episode...")
