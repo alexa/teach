@@ -8,6 +8,40 @@ The code and model weights are licensed under the MIT License (see SOFTWARELICEN
 (see IMAGESLICENSE) and other data files are licensed under CDLA-Sharing 1.0 (see DATALICENSE).
 Please include appropriate licensing and attribution when using our data and code, and please cite our paper.
 
+Citation:
+```buildoutcfg
+@inproceedings{teach,
+  title={{TEACh: Task-driven Embodied Agents that Chat}},
+  author={Padmakumar, Aishwarya and Thomason, Jesse and Shrivastava, Ayush and Lange, Patrick and Narayan-Chen, Anjali and Gella, Spandana and Piramuthu, Robinson and Tur, Gokhan and Hakkani-Tur, Dilek},
+  booktitle={Proceedings of the AAAI Conference on Artificial Intelligence},
+  volume={36},
+  number={2},
+  pages={2017--2025},
+  year={2022}
+}
+```
+
+
+As of 09/07/2022, the dataset has been updated to include dialog acts annotated in the paper
+
+[Dialog Acts for Task-Driven Embodied Agents](https://assets.amazon.science/9c/af/d18d00b44a129e10f1f29de9861a/dialog-acts-for-task-driven-embodied-agents.pdf)
+
+Spandana Gella*, Aishwarya Padmakumar*, Patrick Lange, Dilek Hakkani-Tur
+
+If using the dialog acts in your work, please cite the following paper:
+```buildoutcfg
+@inproceedings{teachda,
+  title={{Dialog Acts for Task-Driven Embodied Agents}},
+  author={Gella, Spandana and Padmakumar, Aishwarya and Lange, Patrick and Hakkani-Tur, Dilek},
+  booktitle={Proceedings of the 23nd Annual Meeting of the Special Interest Group on Discourse and Dialogue (SIGDial)},
+  year={2022},
+  pages={111-123}
+}
+```
+
+Interactions in the games, EDH instances and TfD instances that are utterances now have an additional field `da_metadata` containing the dialog act annotations.
+See the [data exploration notebook](https://github.com/alexa/teach/blob/main/src/teach/analysis/teach_data_exploration.ipynb) for sample code to view dialog acts.
+
 ## Prerequisites
 - python3 `>=3.7,<=3.8`
 - python3.x-dev, example: `sudo apt install python3.8-dev`
