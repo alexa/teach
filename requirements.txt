@@ -24,7 +24,7 @@ torchvision==0.14.1
 tensorboardX==1.8
 Flask==2.3.2
 flask_restful==0.3.9
-Werkzeug==2.2.3
+Werkzeug==3.0.1
 Flask-Cors==3.0.9
 Flask-SocketIO==4.3.1
 flask_wtf==1.0.1
